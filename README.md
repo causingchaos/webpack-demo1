@@ -144,3 +144,17 @@ Issue: main.js:13369 Uncaught TypeError: Class constructor LitElement cannot be 
 
 solution, add a rule to transpiling:
 include: /node_modules(?:\/|\\)lit-element|lit-html/,  //transpile lit-element shit
+To anyone else that ends up here, lit-element is distributed as es2015 so you must transpile it to es5 as part of your build process. If you're using Webpack add the following to your JavaScript rule:
+
+{
+  include: [
+    // These packages are distributed as es2015 modules, therefore they need
+    // to be transpiled to es5.
+    /node_modules(?:\/|\\)lit-element|lit-html/
+  ]
+}
+https://github.com/Polymer/lit-html/issues/873
+
+
+// webcomponents v1 spec polyfills -- how to
+https://www.npmjs.com/package/@webcomponents/webcomponentsjs#how-to-use

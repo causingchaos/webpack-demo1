@@ -99,3 +99,48 @@ now add another node to webpack.config:
 add a new build script for dev server to package.json
 "start:dev": "./node_modules/.bin/webpack-dev-server"   -- don't need node_modules unless you are using it in --save-dev
 
+// Code splitting
+optimize code for preformance
+optimize code for developer workflow
+--> can break up code into different bundles.
+--> multiple entry points
+
+About-us.js --> about-us.bundle.js
+Home-us.js -> home-us.bundle.js
+entry: {
+        about: "./src/about.js",
+        contact: "./src/contact.js",
+    },
+
+now add an optimization section to webpack config
+    optimization: {
+        splitChunks: {
+            chunks: 'all'   //look for repeated code in bundles
+        }
+    },
+
+ // HtmlWebpackPlugin
+    generates an html in dist folder that links to the bundle
+import into webpack config    
+npm install html-webpack-plugin --save-dev
+webpack --> 
+},
+    plugins: [new HtmlWebpackPlugin()],
+    module: {
+
+// Minifiers -- good for prod
+npm install uglifyjs-webpack-plugin --save-dev
+import in webpack config
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+add a new optimization section to webpack config --> 
+
+
+npm install --save @polymer/lit-element
+
+
+
+//// LIT ELEMENT ISSUES ::
+Issue: main.js:13369 Uncaught TypeError: Class constructor LitElement cannot be invoked without 'new'
+
+solution, add a rule to transpiling:
+include: /node_modules(?:\/|\\)lit-element|lit-html/,  //transpile lit-element shit

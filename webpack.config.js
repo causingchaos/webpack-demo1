@@ -1,40 +1,79 @@
-const path = require("path");
+const path = require('path');
+const { resolve } = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin');
+const webcomponentsjs = './node_modules/@webcomponents/webcomponentsjs';
 
-module.exports = {
-    entry: "./src/index.js",
-    output: {
-        filename: "main.js",
-        path: path.resolve(__dirname, "dist")
+const polyfills = [
+    {
+      from: resolve(`${webcomponentsjs}/webcomponents-*.{js,map}`),
+      to: 'vendor',
+      flatten: true
     },
-    devServer: {
-        contentBase: path.join(__dirname, "dist"),
-        port: 9000
+    {
+      from: resolve(`${webcomponentsjs}/bundles/*.{js,map}`),
+      to: 'vendor/bundles',
+      flatten: true
     },
-    module: {
-        rules: [
-            {
-                test: /\.js$/,  //please transpile any JS files with babel
-                exclude: /(node_modules)/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env', '@babel/preset-react']
-                    }
-                }
-            },
-            {
-                test: /\.css$/,
-                use: [
-                    {loader: 'style-loader'},
-                    {loader: 'css-loader'}
-                ]
-            },
-            {
-                test: /\.(png|jpg)$/,
-                use: [
-                    {loader: 'url-loader'}
-                ]
-            }
-        ]
+    {
+      from: resolve(`${webcomponentsjs}/custom-elements-es5-adapter.js`),
+      to: 'vendor',
+      flatten: true
     }
+  ];
+
+  const assets = [
+    {
+      from: 'src/img',
+      to: 'img/'
+    }
+  ];
+
+
+module.exports = ({ mode }) => {
+    return {
+        mode,
+        entry: './src/index.js',
+        output: {
+            filename: "main.js",
+            path: path.resolve(__dirname, "dist")
+        },
+        devServer: {
+            contentBase: path.join(__dirname, "dist"),
+            port: 9000
+        },
+        plugins: [
+            new HtmlWebpackPlugin({
+                filename: 'index.html',
+                template: './src/index.html'
+            }),
+            new CopyPlugin([...polyfills, ...assets])
+        ],
+        devtool: mode === 'development' ? 'source-map' : 'none',
+        module: {
+            rules: [
+                {
+                    test: /\.js$/,  //please transpile any JS files with babel
+                    exclude: /node_modules/,
+                    include: /node_modules(?:\/|\\)lit-element|lit-html/,  //transpile lit-element shit
+                    use: {
+                        loader: 'babel-loader',
+                        options: {
+                            plugins: ['@babel/plugin-syntax-dynamic-import'],
+                            presets: ['@babel/preset-env']
+                        }
+                    }
+                },
+                {
+                    test: /\.css$/,
+                    use: [
+                        {loader: 'style-loader'},
+                        {loader: 'css-loader'}
+                    ]
+                }
+
+            ],
+        }
+    }
+    
 }

@@ -158,3 +158,9 @@ https://github.com/Polymer/lit-html/issues/873
 
 // webcomponents v1 spec polyfills -- how to
 https://www.npmjs.com/package/@webcomponents/webcomponentsjs#how-to-use
+
+//To overide the shadow dom, which doesn't use any of our outside styles --> 
+at the end of your class include this:
+createRenderRoot(){
+    return this;
+}

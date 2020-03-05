@@ -59,7 +59,9 @@ module.exports = ({ mode }) => {
                     use: {
                         loader: 'babel-loader',
                         options: {
-                            plugins: ['@babel/plugin-syntax-dynamic-import'],
+                            plugins: [
+                                '@babel/plugin-syntax-dynamic-import',
+                            ],
                             presets: ['@babel/preset-env']
                         }
                     }

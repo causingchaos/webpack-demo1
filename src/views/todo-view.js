@@ -41,8 +41,33 @@ class TodoView extends LitElement{
           @click="${this.addTodo}"
         >Add Task</vaadin-button>
       </div>
+
+      <div class="todos-list">
+        ${this.todos.map(todo => html`
+          <div class=todo-item>
+            <vaadin-checkbox
+              ?checked="${todo.complete}"
+              @change="${event => this.updateTodoStatus(todo, event.target.checked)}"
+            >${todo.task}</vaadin-checkbox>
+          </div>
+        `)}
+      </div>
+
+      <vaadin-radio-group>
+        ${Object.values(VisibilityFilters).map(filter => html`
+          <vaadin-radio-button value="${filter}">${filter}</vaadin-radio-button>
+        `)}
+      </vaadin-radio-group>
     `
   }
+  // return new todo list, with the complete box checked.
+  // {... updateTodo, complete } overwrite the complete field only
+  updateTodoStatus(updatedTodo,complete){
+    this.todos = this.todos.map(todo => 
+      updatedTodo === todo ? {...updatedTodo, complete} : todo
+      );
+  }
+
   shortcutListener(event) {
     if(event.key === 'Enter') {
       this.addTodo();

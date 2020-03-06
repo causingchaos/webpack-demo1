@@ -5,10 +5,8 @@ import '@vaadin/vaadin-radio-button';
 import '@vaadin/vaadin-text-field';
 import '@vaadin/vaadin-radio-button/vaadin-radio-group';
 
-
-
 // our redux store and reducer 
-import { VisibilityFilters } from '../redux/reducer.js'
+import { VisibilityFilters, getVisibileTodosSelector } from '../redux/reducer.js'
 import { store } from '../redux/store.js'
 
 // pwa-helpers npm allows us to onnect LitElement to Redux store
@@ -16,10 +14,11 @@ import { connect } from 'pwa-helpers';
 import { 
   updateFilter, clearCompleted, addTodo, updateTodoStatus 
 } from '../redux/actions.js';
+import { BaseView } from './base-view.js';
 
 //class TodoView extends LitElement{  
      // new code, connect the store using pwa helper 
-class TodoView extends connect(store)(LitElement) { 
+class TodoView extends connect(store)(BaseView) { 
 
   static get properties() {
     return {
@@ -32,7 +31,8 @@ class TodoView extends connect(store)(LitElement) {
   // calling connect on LitElement will give us one more call back function, which is
   // state changed
   stateChanged(state){
-    this.todos = state.todos;
+    //this.todos = state.todos; // instead call selector
+    this.todos = getVisibileTodosSelector(state);
     this.filter = state.filter;
     // note task is omitted because it's very specific to this view, and not 
     // the global state.
@@ -83,7 +83,7 @@ class TodoView extends connect(store)(LitElement) {
       </div>
 
       <div class="todos-list">
-        ${this.applyFilter(this.todos).map(todo => html`
+        ${ this.todos.map(todo => html`
           <div class=todo-item>
             <vaadin-checkbox
               ?checked="${todo.complete}"
@@ -124,16 +124,8 @@ class TodoView extends connect(store)(LitElement) {
   }
 
   // filter out based on which radio button is ticked off
-  applyFilter(todos) {
-    switch(this.filter) {
-      case VisibilityFilters.SHOW_ACTIVE:
-        return todos.filter(todo => !todo.complete);
-      case VisibilityFilters.SHOW_COMPLETED:
-        return todos.filter(todo => todo.complete);
-      default:
-        return todos;    
-    }
-  }
+  //applyFilter(todos) { //moved into redux selector in reducer.js
+  //} 
 
   // return new todo list, with the complete box checked.
   // {... updateTodo, complete } overwrite the complete field only
@@ -167,10 +159,11 @@ class TodoView extends connect(store)(LitElement) {
     }
   }
   
+    
   // disable shadow dom -- to use top level styles. Remove this if you want shielded styles, ect
-  createRenderRoot(){
-    return this;
-  }
+  //createRenderRoot(){
+  //  return this; //removed to base-view.js
+  //}
 }
 
 //use dashes as per spec, to avoid collisions

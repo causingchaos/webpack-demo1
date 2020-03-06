@@ -29,7 +29,9 @@ export const reducer = (state = INITIAL_STATE, action) => {
         ...state,
         //find the one matching todo, and overwrite complete
         todos: state.todos.map(todo => 
-          action.todo === todo ? {...todo, complete: action.complete} : todo    
+          todo.id === action.todo.id 
+            ? {...action.todo, complete: action.complete} 
+            : todo    
         )
       };
     case UPDATE_FILTER:
@@ -49,11 +51,11 @@ export const reducer = (state = INITIAL_STATE, action) => {
 
 // selectors return only a specific part of the state
 const getTodosSelector = state => state.todos;
-const getFiltersSelectors = state => state.filter;
+const getFilterSelector = state => state.filter;
 
 export const getVisibileTodosSelector = createSelector(
   getTodosSelector,  //passed in state will run both individual selectors first.
-  getFiltersSelectors,  // these will update state if they change, not affecting the entire tree
+  getFilterSelector,  // these will update state if they change, not affecting the entire tree
   (todos, filter) => {
     switch(filter) {
       case VisibilityFilters.SHOW_ACTIVE:
@@ -67,13 +69,12 @@ export const getVisibileTodosSelector = createSelector(
 );
 
 export const statsSelector = createSelector(
-  getTodosSelector,  //we only need the todos from state store
-  (todos) => {
+  getTodosSelector,
+  todos => {
     const completed = todos.filter(todo => todo.complete).length;
-    
-    return {  // return an object
+    return {
       completed,
       active: todos.length - completed
-    }
+    };
   }
 );

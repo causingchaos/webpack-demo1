@@ -35,7 +35,8 @@ module.exports = ({ mode }) => {
         mode,
         entry: './src/index.js',
         output: {
-            filename: "main.js",
+            filename: '[name].[chunkhash:8].js',  
+          //filename: "main.js",
             path: path.resolve(__dirname, "dist")
         },
         devServer: {

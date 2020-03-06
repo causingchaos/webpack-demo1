@@ -1,6 +1,5 @@
 import './styles.css';
 import './views/todo-view.js'
-import './views/not-found-view.js'
 import { Router } from '@vaadin/router';
 
 // setup routing with vaadin routing  //
@@ -24,16 +23,16 @@ function initRouter() {
         {
             path: '/stats',
             component: 'stats-view',
-            //action: () => 
+            action: () => 
             //dynamic import, will only download this code bundle when navigating to it
             // stats is a label you can see in network console.
-             //   import(/* webpackChunkName: "stats" */ '.views/stats-view')
+                import(/* webpackChunkName: "stats" */ './views/stats-view')
         },
         {
             path: '(.*)',
             component: 'not-found-view',
-            //action: () =>
-              //  import(/* webpackChunkName: "not-found-view" */ '.views/not-found-view')
+            action: () =>
+                import(/* webpackChunkName: "not-found-view" */ './views/not-found-view')
         }
     ])
 }

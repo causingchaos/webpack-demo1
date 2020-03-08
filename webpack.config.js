@@ -37,7 +37,9 @@ module.exports = ({ mode }) => {
         output: {
             filename: '[name].[chunkhash:8].js',  
           //filename: "main.js",
-            path: path.resolve(__dirname, "dist")
+
+          //  path: path.resolve(__dirname, "dist")
+          // 
         },
         devServer: {
             contentBase: path.join(__dirname, "dist"),

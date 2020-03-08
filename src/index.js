@@ -8,7 +8,6 @@ window.addEventListener('load', () => {
     initRouter();
 })
 
-
 // IMPORTANT NOTE // Make sure that on your server (i.e. express), you always tell it to fall back to 
 // index.html on routes it can't resolve.
 // https://vaadin.com/learn/tutorials/lit-element/navigation-and-code-splitting

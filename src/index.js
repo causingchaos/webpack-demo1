@@ -1,5 +1,6 @@
 import './styles.css';
 import './views/todo-view.js'
+import './views/messages-view.js'
 import { Router } from '@vaadin/router';
 
 // setup routing with vaadin routing  //
@@ -26,6 +27,10 @@ function initRouter() {
             //dynamic import, will only download this code bundle when navigating to it
             // stats is a label you can see in network console.
                 import(/* webpackChunkName: "stats" */ './views/stats-view')
+        },
+        {
+          path: '/messages',
+          component: 'messages-view'
         },
         {
             path: '(.*)',

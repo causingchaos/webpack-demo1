@@ -75,6 +75,10 @@ module.exports = ({ mode }) => {
                         {loader: 'style-loader'},
                         {loader: 'css-loader'}
                     ]
+                },
+                {
+                  test: /\.jpg$/,
+                  loader: "file-loader"
                 }
 
             ],

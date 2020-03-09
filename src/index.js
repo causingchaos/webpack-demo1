@@ -1,7 +1,11 @@
 import './styles.css';
 import './views/todo-view.js'
 import './views/messages-view.js'
+
+import './views/nav-view.js'
 import { Router } from '@vaadin/router';
+
+
 
 // setup routing with vaadin routing  //
 // allow html to load first by using this
@@ -18,7 +22,10 @@ function initRouter() {
     router.setRoutes([
         {
             path: '/',
-            component: 'todo-view'
+            component: 'nav-view',
+            children: [
+                {path: '/', component: 'todo-view'},
+            ]
         },
         {
             path: '/stats',

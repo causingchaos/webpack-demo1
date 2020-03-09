@@ -17,7 +17,7 @@ class NavView extends BaseView{
           <a href="/">Todo</a>
           <a href="/stats">Stats</a>
           <a href="/messages">Messages</a>
-          <vaadin-button @click=${event => location.href = './messages'}>TEST</vaadin-button>
+          <vaadin-button @click=${event => window.location.href = './messages'}>TEST</vaadin-button>
         </nav>
       </header>
       

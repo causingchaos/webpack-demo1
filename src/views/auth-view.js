@@ -33,7 +33,7 @@ class AuthView extends LitElement{
       </style>
       <div class="background-container">
           <div class="form-container">
-          <vaadin-login-form></vaadin-login-form>
+          <vaadin-login-form @load ="${this.consoleLog}"></vaadin-login-form>
           </div>
           <vaadin-dialog id="feedbackDialog">
             <template>Login is being processed</template>
@@ -44,10 +44,12 @@ class AuthView extends LitElement{
       </div>
     `;
   }
-
-  random() {
-    console.log("Inside class --> Hello")
-    
+  // firstUpdated lifecycle method fires after render
+  firstUpdated() {
+    window.addEventListener('WebComponentsReady', function() {
+      var login = document.querySelector('vaadin-login-form');
+      var feedbackDialog = document.querySelector('#feedbackDialog');
+    })
   }
 
 }

@@ -8,21 +8,31 @@ class NavView extends BaseView{
     render(){
     return html`
       <style>
-
-      </style>
-    
+        </style>
       <header>
-        <h1>Test App</h1>
+        <h2>Test App</h2>
         <nav>
-          <a href="/">Todo</a>
-          <a href="/stats">Stats</a>
-          <a href="/messages">Messages</a>
-          <vaadin-button @click=${event => window.location.href = './messages'}>TEST</vaadin-button>
+          <vaadin-button 
+            @click=${event => window.location.href = './'} >
+            Todo
+          </vaadin-button>
+          <vaadin-button 
+            @click=${event => window.location.href = './stats'} >
+            Stats
+          </vaadin-button>
+          <vaadin-button 
+            @click=${event => window.location.href = './messages'} >
+            Messages
+          </vaadin-button>
+          <vaadin-button id="loginBtn"
+            theme="primary"
+            @click=${event => window.location.href = './auth'} >
+            Login
+          </vaadin-button>
         </nav>
       </header>
-      
       <main>
-        <slot></slot>
+        <slot></slot> <!--Render component below nav -->
       </main>
       `
     };

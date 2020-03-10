@@ -1,6 +1,7 @@
 import './styles.css';
 import './views/todo-view.js'
 import './views/messages-view.js'
+import './views/auth-view.js'
 
 import './views/nav-view.js'
 import { Router } from '@vaadin/router';
@@ -18,32 +19,42 @@ window.addEventListener('load', () => {
 // https://vaadin.com/learn/tutorials/lit-element/navigation-and-code-splitting
 //https://angular.io/guide/deployment#routed-apps-must-fallback-to-indexhtml
 function initRouter() {
-    const router = new Router(document.querySelector('main'));
-    router.setRoutes([
+  const router = new Router(document.querySelector('main'));
+  router.setRoutes([
+    {
+      //render nav first, then render children into <slot><slot> on nav lit template
+      path: '/',
+      component: 'nav-view', 
+      children: [
         {
-            path: '/',
-            component: 'nav-view',
-            children: [
-                {path: '/', component: 'todo-view'},
-            ]
-        },
-        {
-            path: '/stats',
-            component: 'stats-view',
-            action: () => 
-            //dynamic import, will only download this code bundle when navigating to it
-            // stats is a label you can see in network console.
-                import(/* webpackChunkName: "stats" */ './views/stats-view')
+          path: '/',
+          component: 'todo-view',
+          action: () => import(/* webpackChunkName: "todos" */ './views/todo-view'),
         },
         {
           path: '/messages',
-          component: 'messages-view'
+          component: 'messages-view' },
+        { 
+          path: '/stats',
+          component: 'stats-view', 
+          action: () => import(/* webpackChunkName: "stats" */ './views/stats-view')
         },
         {
-            path: '(.*)',
-            component: 'not-found-view',
-            action: () =>
-                import(/* webpackChunkName: "not-found-view" */ './views/not-found-view')
+          path: '/auth',
+          component: 'auth-view' 
+        },
+        {
+          path: '(.*)',
+          component: 'not-found-view',
+          action: () =>
+          import(/* webpackChunkName: "not-found-view" */ './views/not-found-view')
         }
-    ])
+          ]
+    }
+  ])
 }
+
+/*
+//dynamic import, will only download this code bundle when navigating to it
+            // stats is a label you can see in network console.
+*/

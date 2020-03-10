@@ -5,7 +5,7 @@ import { html } from "lit-element";
 class NotFoundView extends BaseView {
     render() {
         return html`
-            <h1>Not Found</h1>
+            <h1>ERROR 404 Page Not Found</h1>
         `
     }
 }

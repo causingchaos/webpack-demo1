@@ -37,15 +37,3 @@ a {
 a:visited, a:active {
     color: var(--shade-color);
 }
-
-header, main, nav {
-    padding: var(--spacing);
-}
-nav{
-    height: 3px;
-}
-
-header{
-    background: var(--dark-color);
-    color: var(--base-color)
-}

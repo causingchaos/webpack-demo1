@@ -50,28 +50,40 @@ class TodoView extends connect(store)(BaseView) {
   render(){
     return html`
       <style>
-        todo-view {
-          display: block;
-          max-width: 800px;
-          margin: 0 auto;
+        #input-container{
+          margin-top: 15px;
+          padding: 25px;
+          background-color: white;
+          width: 40%;
         }
-        todo-view .input-layout{
-          display: flex;
-          width: 100%;
+        #todos-container{
+          margin-top: 15px;
+          padding: 25px;
+          background-color: white;
+          width: 40%;
         }
-        todo-view .input-layout vaadin-text-field {
-          flex: 1;
-          margin-right: var(--spacing);
+        #filters-container{
+          margin-top: 15px;
+          padding: 25px;
+          background-color: white;
+          width: 30%;
         }
-        todo-view .todos-list {
-          margin-top: var(--sapcing);
+        #action-container{
+          margin-top: 15px;
+          padding: 25px;
+          background-color: white;
+          width: 150px;
         }
-        todo-view .visibility-filters {
-          margin-top: calc(4* var(--spacing));
+        #task-field{
+          margin-top: 15px;
         }
+
       </style>
-      <div class="input-layout" @keyup="${this.shortcutListener}">
+      
+      <div id="input-container" @keyup="${this.shortcutListener}">
+      <h2>Todo List</h2>
         <vaadin-text-field
+          id="task-field"
           placeholder="Task"
           value="${this.task || ""}"
           @change="${this.updateTask}" 
@@ -82,7 +94,7 @@ class TodoView extends connect(store)(BaseView) {
         >Add Task</vaadin-button>
       </div>
 
-      <div class="todos-list">
+      <div id="todos-container">
         ${ this.todos.map(todo => html`
           <div class=todo-item>
             <vaadin-checkbox
@@ -94,6 +106,7 @@ class TodoView extends connect(store)(BaseView) {
       </div>
 
       <vaadin-radio-group
+        id="filters-container"
         class="visibility-filters"
         value="${this.filter}"
         @value-changed="${this.filterChanged}"
@@ -107,8 +120,12 @@ class TodoView extends connect(store)(BaseView) {
           `
           )
         }
-      </vaadin-radio-group>
-      <vaadin-button @click="${this.clearCompleted}">Clear Completed</vaadin-button>
+      </vaadin-radio-group> 
+
+      <div id=action-container> 
+        <vaadin-button @click="${this.clearCompleted}">Clear Completed</vaadin-button>
+      </div>  
+      
     `;
   }
 

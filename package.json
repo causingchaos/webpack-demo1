@@ -35,6 +35,7 @@
     "@vaadin/vaadin-button": "^2.2.2",
     "@vaadin/vaadin-charts": "^6.2.4",
     "@vaadin/vaadin-checkbox": "^2.2.12",
+    "@vaadin/vaadin-dialog": "^2.2.1",
     "@vaadin/vaadin-form-layout": "^2.1.7",
     "@vaadin/vaadin-login": "^1.0.1",
     "@vaadin/vaadin-menu-bar": "^1.0.5",

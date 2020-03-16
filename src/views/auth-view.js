@@ -1,8 +1,8 @@
 import { LitElement, html } from 'lit-element'
-import { BaseView } from './base-view';
 
 import '@vaadin/vaadin-text-field/vaadin-email-field'
 import '@vaadin/vaadin-text-field/vaadin-password-field'
+import '@vaadin/vaadin-dialog';
 import '@vaadin/vaadin-button';
 import '@vaadin/vaadin-login';
 
@@ -35,7 +35,7 @@ class AuthView extends LitElement{
       </style>
       <div class="background-container">
           <main class="form-container">
-          <vaadin-login-form id="login-form""
+          <vaadin-login-form id="login-form"
           @login="${(e) => console.log(e.target)}"
           @forgot-password="${(e) => this.forgotDialog(e)}"
           ></vaadin-login-form>
@@ -59,9 +59,6 @@ class AuthView extends LitElement{
   // firstUpdated lifecycle method fires after render
   firstUpdated() {
   };
-
-  // event functions
-  
 
 };
 

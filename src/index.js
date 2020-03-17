@@ -2,6 +2,7 @@ import './styles.css';
 import './views/todo-view.js'
 import './views/messages-view.js'
 import './views/auth-view.js'
+import './views/demo-element.js'
 
 import './views/nav-view.js'
 import { Router } from '@vaadin/router';

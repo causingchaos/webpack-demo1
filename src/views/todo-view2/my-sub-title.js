@@ -1,6 +1,14 @@
 import { LitElement, html } from "lit-element";
+import { todoSubTitleStyles, todoBaseStyle } from "../../styles/todo2-styles";
 
 export class MySubTitle extends LitElement{
+  static get styles() {
+    return [
+      todoBaseStyle,
+      todoSubTitleStyles
+    ]
+  }
+
   static get properties() {
     return {
       myText: { attribute: 'my-text' }
@@ -13,16 +21,7 @@ export class MySubTitle extends LitElement{
 
   render() {
     return html`
-      <style>
-        :host {
-          padding: 0px;
-          display: block;
-        }
-      </style>
-      <div>
-      <h2>${this.myText}</h2>
-      </div>
-      
+      <h2 class="subtitle">${this.myText}</h2>
     `
   }
 }

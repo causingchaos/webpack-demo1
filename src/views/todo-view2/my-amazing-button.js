@@ -1,6 +1,14 @@
 import { html, LitElement } from 'lit-element';
+import { todoBaseStyle, todoButton } from '../../styles/todo2-styles';
 
 class MyAmazingButton extends LitElement{
+  static get styles() {
+    return [
+      todoBaseStyle,
+      todoButton
+    ]
+  }
+
   static get properties() {
     return {
       counter: { type: Number }
@@ -14,9 +22,10 @@ class MyAmazingButton extends LitElement{
 
   render() {
     return html`
-      <div>
+      <div clas="item">
         <button 
         @click="${this.clickHandler}"
+        class="button"
         >👋 Click me! ${this.counter.toString()}</button>
       </div>
     `

@@ -2,8 +2,7 @@ import './styles.css';
 import './views/todo-view.js'
 import './views/messages-view.js'
 import './views/auth-view.js'
-import './views/demo-element.js'
-
+import './views/todo-view2/todo-view2.js'
 import './views/nav-view.js'
 import { Router } from '@vaadin/router';
 
@@ -43,6 +42,10 @@ function initRouter() {
         {
           path: '/auth',
           component: 'auth-view' 
+        },
+        {
+          path: '/todo-view2',
+          component: 'todo-view2'
         },
         {
           path: '(.*)',

@@ -8,7 +8,7 @@ class NavView extends BaseView{
     render(){
     return html`
       <style>
-        </style>
+      </style>
       <header>
         <h2>Test App</h2>
         <nav>
@@ -23,6 +23,10 @@ class NavView extends BaseView{
           <vaadin-button 
             @click=${event => window.location.href = './messages'} >
             Messages
+          </vaadin-button>
+          <vaadin-button 
+            @click=${event => window.location.href = './todo-view2'} >
+            Todo2
           </vaadin-button>
           <vaadin-button id="loginBtn"
             theme="primary"

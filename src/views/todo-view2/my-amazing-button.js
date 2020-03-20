@@ -33,6 +33,16 @@ class MyAmazingButton extends LitElement{
   clickHandler() {
     this.counter+=1;
     console.log(this.counter)
+
+    // composed flag -- allow event to bubble past Shadow DOM and regular DOM
+    // bubbles, allows event to bubble to top of shawdow tree
+    this.dispatchEvent(
+      new CustomEvent('add-buddy', {
+        bubbles: true, composed: true, 
+        detail: { value: `🐻 Teddy n°${this.counter}`}
+      })
+    )
   }
 }
+
 customElements.define('my-amazing-button', MyAmazingButton);

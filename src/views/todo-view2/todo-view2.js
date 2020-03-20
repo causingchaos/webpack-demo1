@@ -6,6 +6,7 @@ import './my-title.js'
 import './my-sub-title.js'
 import './my-amazing-button.js'
 import './buddies-list.js'
+import './message-banner.js'
 import { BaseView } from '../base-view.js';
 
 class TodoView2 extends BaseView{
@@ -17,6 +18,7 @@ class TodoView2 extends BaseView{
 
   constructor() {
     super();
+    //listen for bubbling event add-buddy
   };
 
   render() {
@@ -30,19 +32,10 @@ class TodoView2 extends BaseView{
         </div>
         <my-amazing-button></my-amazing-button>
         <buddies-list></buddies-list>
+        <div class="item">
+          <my-message-banner></my-message-banner>
+        </div>
       </div>
-      
-      
- 
-
-      
-
-        
-        
-        
-
-      
-      
     `
   }
 }

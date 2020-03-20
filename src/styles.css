@@ -13,9 +13,6 @@ html{
     height: 100%;
     width: 100%;
 }
-ul{
-  list-style-type: none;
-}
 
 body{
     font-family: -apple-system, BlinkMacSystemFont, 'Roboto', 'Segoe UI',
@@ -33,11 +30,4 @@ body{
 
 [hidden] {
     display: none;
-}
-
-a {
-    color: var(--dark-color);
-}
-a:visited, a:active {
-    color: var(--shade-color);
 }
